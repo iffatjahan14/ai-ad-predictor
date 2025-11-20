@@ -3,9 +3,17 @@ const path = require('path');
 
 const dbPath = path.join(__dirname, '../data/db.json');
 
+
 // Initialize database if missing
 const initDB = () => {
   try {
+    // Create data folder if it doesn't exist
+    const dataDir = path.dirname(dbPath);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+      console.log('Created data directory');
+    }
+    
     const data = fs.readFileSync(dbPath, 'utf8');
     JSON.parse(data);
   } catch (error) {
@@ -15,6 +23,13 @@ const initDB = () => {
       adPredictions: [],
       suggestions: []
     };
+    
+    // Create data folder if it doesn't exist
+    const dataDir = path.dirname(dbPath);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    
     fs.writeFileSync(dbPath, JSON.stringify(initialData, null, 2));
   }
 };
