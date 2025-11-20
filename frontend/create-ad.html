@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Ad - AI Ad Performance Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+      <div class="card-header">
+        <h2 class="card-title">🎯 Create Ad Prediction</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">
+          Enter your ad details to get AI-powered performance predictions from Google Gemini
+        </p>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <form id="create-ad-form" onsubmit="handleCreateAd(event)">
+        <div class="form-group">
+          <label class="form-label" for="ad-title">Ad Title *</label>
+          <input 
+            type="text" 
+            id="ad-title" 
+            class="form-control" 
+            placeholder="e.g., Summer Sale - 50% Off"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="ad-text">Ad Text *</label>
+          <textarea 
+            id="ad-text" 
+            class="form-control" 
+            placeholder="Write your ad copy here... Be descriptive and engaging."
+            rows="5"
+            required
+          ></textarea>
+          <small style="color: var(--text-muted);">
+            Tip: Include benefits, call-to-action, and create urgency
+          </small>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="ad-image">Ad Image (Optional)</label>
+          <div class="file-upload">
+            <input type="file" id="ad-image" accept="image/*">
+            <label for="ad-image" class="file-upload-label">
+              📁 <span id="file-name">Choose image file (max 5MB)</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="budget">Budget (USD) *</label>
+          <input 
+            type="number" 
+            id="budget" 
+            class="form-control" 
+            placeholder="e.g., 1000"
+            min="1"
+            step="0.01"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="audience">Target Audience *</label>
+          <input 
+            type="text" 
+            id="audience" 
+            class="form-control" 
+            placeholder="e.g., Men 25-45, interested in fitness"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="platform">Platform *</label>
+          <select id="platform" class="form-select" required>
+            <option value="">Select platform...</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Google Ads">Google Ads</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          🤖 Generate AI Prediction
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/createAd.js"></script>
+</body>
+</html>

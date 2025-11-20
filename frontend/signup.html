@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - AI Ad Performance Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="signin.html" class="nav-link">Sign In</a></li>
+        <li><a href="signup.html" class="nav-link">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Create Account</h1>
+        <p>Start predicting ad performance with real AI</p>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <form id="signup-form" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="form-control" 
+            placeholder="John Doe"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="form-control" 
+            placeholder="john@example.com"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-control" 
+            placeholder="Minimum 6 characters"
+            required
+            minlength="6"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="confirm-password">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirm-password" 
+            class="form-control" 
+            placeholder="Re-enter password"
+            required
+            minlength="6"
+          >
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Create Account
+        </button>
+      </form>
+      
+      <p style="margin-top: 1.5rem; text-align: center; color: var(--text-muted);">
+        Already have an account? 
+        <a href="signin.html" style="color: var(--primary-light); text-decoration: none; font-weight: 600;">
+          Sign In
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

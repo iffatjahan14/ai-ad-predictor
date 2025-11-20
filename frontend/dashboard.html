@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - AI Ad Performance Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+        Welcome back, <span id="user-name">User</span>!
+      </h1>
+      <p style="color: var(--text-muted);">
+        Here's your ad performance overview
+      </p>
+    </div>
+    
+    <div id="alert-container"></div>
+    
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Ads Predicted</div>
+        <div class="kpi-value" id="total-ads">0</div>
+      </div>
+      
+      <div class="kpi-card">
+        <div class="kpi-label">Average CTR</div>
+        <div class="kpi-value">
+          <span id="avg-ctr">0</span><span style="font-size: 1.5rem; margin-left: 0.25rem;">%</span>
+        </div>
+      </div>
+      
+      <div class="kpi-card">
+        <div class="kpi-label">Avg. Engagement</div>
+        <div class="kpi-value" id="avg-engagement">0</div>
+      </div>
+    </div>
+    
+    <!-- Predictions History -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">📋 Prediction History</h3>
+      </div>
+      
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Ad Title</th>
+              <th>Platform</th>
+              <th>CTR (%)</th>
+              <th>Reach</th>
+              <th>Engagement</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="predictions-list">
+            <tr>
+              <td colspan="6" class="text-center">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Create New Ad Button -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="create-ad.html" class="btn btn-primary btn-lg">
+        🚀 Create New Ad Prediction
+      </a>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

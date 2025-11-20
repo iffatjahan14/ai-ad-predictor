@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Results - AI Ad Performance Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div id="alert-container"></div>
+    
+    <!-- Ad Info Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">📊 AI Prediction Results</h2>
+        <div id="ai-badge" style="margin-top: 0.5rem;"></div>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div>
+          <div style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.25rem;">Ad Title</div>
+          <div style="font-weight: 600;" id="ad-title-display">Loading...</div>
+        </div>
+        <div>
+          <div style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.25rem;">Platform</div>
+          <div style="font-weight: 600;" id="ad-platform">Loading...</div>
+        </div>
+        <div>
+          <div style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0.25rem;">Budget</div>
+          <div style="font-weight: 600;" id="ad-budget">Loading...</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Metrics Grid -->
+    <div class="prediction-grid">
+      <div class="metric-card">
+        <div class="metric-label">Predicted CTR</div>
+        <div class="metric-value">
+          <span id="ctr-value">0</span><span class="metric-unit">%</span>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Estimated Reach</div>
+        <div class="metric-value" id="reach-value">0</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Expected Engagement</div>
+        <div class="metric-value" id="engagement-value">0</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Confidence</div>
+        <div class="metric-value">
+          <span id="confidence-value">0</span><span class="metric-unit">%</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Chart -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">📈 Performance Visualization</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="prediction-chart"></canvas>
+      </div>
+    </div>
+    
+    <!-- Explanation -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">💡 AI Analysis</h3>
+      </div>
+      <p id="explanation" style="line-height: 1.8; color: var(--text-secondary);">
+        Loading explanation...
+      </p>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <button onclick="goToSuggestions()" class="btn btn-primary btn-lg">
+        ✨ See AI Suggestions
+      </button>
+      <button onclick="savePrediction()" id="save-btn" class="btn btn-secondary btn-lg">
+        💾 Save to Dashboard
+      </button>
+      <a href="create-ad.html" class="btn btn-secondary btn-lg">
+        🔄 Create Another Ad
+      </a>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/prediction.js"></script>
+</body>
+</html>

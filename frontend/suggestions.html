@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Suggestions - AI Ad Performance Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+      <div class="card-header">
+        <h2 class="card-title">✨ AI Optimization Suggestions</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">
+          Google Gemini AI-powered recommendations to improve your ad performance
+        </p>
+        <div id="ai-badge" style="margin-top: 0.5rem;"></div>
+      </div>
+      
+      <div id="alert-container"></div>
+      <div id="loading-container"></div>
+      
+      <div id="suggestions-container" class="suggestions-list">
+        <!-- Will be populated by JavaScript -->
+      </div>
+      
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+        <a href="prediction.html" class="btn btn-secondary">
+          ← Back to Prediction
+        </a>
+        <button onclick="saveSuggestions()" id="save-suggestions-btn" class="btn btn-primary">
+          💾 Save All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Require authentication
+    requireAuth();
+    
+    let currentData = null;
+    let suggestions = null;
+    
+    // Load suggestions
+    async function loadSuggestions() {
+      const dataStr = sessionStorage.getItem('currentPrediction');
+      
+      if (!dataStr) {
+        showAlert('No prediction data found. Please create an ad first.', 'error');
+        setTimeout(() => {
+          window.location.href = 'create-ad.html';
+        }, 2000);
+        return;
+      }
+      
+      currentData = JSON.parse(dataStr);
+      
+      showLoading('loading-container');
+      
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE}/ad/suggestions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            adData: currentData.adData,
+            prediction: currentData.prediction
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          suggestions = data.suggestions;
+          displaySuggestions(suggestions);
+          hideLoading('loading-container');
+          
+          // Display AI badge
+          if (suggestions.isAIGenerated) {
+            document.getElementById('ai-badge').innerHTML = '<span class="badge badge-success">✨ Google Gemini AI</span>';
+          } else {
+            document.getElementById('ai-badge').innerHTML = '<span class="badge badge-info">📊 Mock Suggestions</span>';
+          }
+        } else {
+          showAlert(data.error || 'Failed to load suggestions', 'error');
+          hideLoading('loading-container');
+        }
+      } catch (error) {
+        showAlert('Connection error. Please try again.', 'error');
+        hideLoading('loading-container');
+      }
+    }
+    
+    // Display suggestions
+    function displaySuggestions(sugg) {
+      const container = document.getElementById('suggestions-container');
+      
+      container.innerHTML = `
+        <div class="suggestion-item">
+          <h4>📝 Improved Ad Copy Variants</h4>
+          <ul>
+            ${sugg.improved_text.map(text => `<li>${text}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div class="suggestion-item">
+          <h4>🎯 Targeting Recommendations</h4>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            ${sugg.targeting}
+          </p>
+        </div>
+        
+        <div class="suggestion-item">
+          <h4>💰 Budget Adjustment</h4>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            ${sugg.budget_adjustment}
+          </p>
+        </div>
+        
+        <div class="suggestion-item">
+          <h4>📱 Platform Recommendation</h4>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            Recommended platform: <strong style="color: var(--primary-light);">${sugg.platform_recommendation}</strong>
+          </p>
+        </div>
+        
+        <div class="suggestion-item">
+          <h4>💡 Overall Strategy</h4>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            ${sugg.explanation}
+          </p>
+        </div>
+      `;
+    }
+    
+    // Save suggestions with prediction
+    async function saveSuggestions() {
+      if (!currentData || !suggestions) {
+        showAlert('No data to save', 'error');
+        return;
+      }
+      
+      const saveBtn = document.getElementById('save-suggestions-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+      
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE}/ad/save`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            adData: currentData.adData,
+            prediction: currentData.prediction,
+            suggestions: suggestions
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          showAlert('✅ Saved successfully!', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        } else {
+          showAlert(data.error || 'Failed to save', 'error');
+          saveBtn.disabled = false;
+          saveBtn.textContent = '💾 Save All';
+        }
+      } catch (error) {
+        showAlert('Connection error. Please try again.', 'error');
+        saveBtn.disabled = false;
+        saveBtn.textContent = '💾 Save All';
+      }
+    }
+    
+    // Initialize
+    loadSuggestions();
+  </script>
+</body>
+</html>
