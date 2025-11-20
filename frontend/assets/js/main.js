@@ -1,5 +1,5 @@
 // API Base URL
-const API_BASE = 'http://localhost:5001/api';
+const API_BASE = 'https://ai-ad-predictor.onrender.com/api';
 
 // Show alert message
 function showAlert(message, type = 'success') {
