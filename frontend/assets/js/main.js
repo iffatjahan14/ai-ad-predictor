@@ -72,7 +72,9 @@ function updateNav() {
     const user = getCurrentUser();
     navLinks.innerHTML = `
       <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="create-ad.html" class="nav-link">Create Ad</a></li>
+      <li><a href="create-ad.html" class="nav-link">AI Predictor</a></li>
+      <li><a href="audience-builder.html" class="nav-link">Audience Builder</a></li>
+      <li><a href="budget-calculator.html" class="nav-link">Budget Calculator</a></li>
       <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
       <li><span class="nav-link" style="opacity: 0.7;">Hi, ${user?.name || 'User'}</span></li>
       <li><a href="#" onclick="logout()" class="nav-link">Logout</a></li>

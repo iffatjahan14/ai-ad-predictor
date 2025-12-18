@@ -3,6 +3,16 @@ requireAuth();
 
 let uploadedImage = null;
 
+// Auto-fill audience if coming from Audience Builder
+window.addEventListener('DOMContentLoaded', function() {
+  const savedAudience = sessionStorage.getItem('targetAudience');
+  if (savedAudience) {
+    document.getElementById('audience').value = savedAudience;
+    showAlert('✅ Target audience auto-filled from Audience Builder!', 'success');
+    sessionStorage.removeItem('targetAudience');
+  }
+});
+
 // Handle file upload
 document.getElementById('ad-image')?.addEventListener('change', async (e) => {
   const file = e.target.files[0];
@@ -50,7 +60,7 @@ async function handleCreateAd(e) {
   }
   
   if (adData.budget < 1) {
-    showAlert('Budget must be at least $1', 'error');
+    showAlert('Budget must be at least ৳1', 'error');
     return;
   }
   
@@ -83,11 +93,11 @@ async function handleCreateAd(e) {
     } else {
       showAlert(data.error || 'Prediction failed', 'error');
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '🤖 Generate Prediction';
+      submitBtn.innerHTML = '🤖 Generate AI Prediction';
     }
   } catch (error) {
     showAlert('Connection error. Please try again.', 'error');
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '🤖 Generate Prediction';
+    submitBtn.innerHTML = '🤖 Generate AI Prediction';
   }
 }

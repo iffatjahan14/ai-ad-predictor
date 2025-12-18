@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Calculator - AI Ad Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+      <div class="card-header">
+        <h2 class="card-title">💰 Ad Budget Calculator for Clothing Business</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">
+          Calculate optimal advertising budget for your fashion campaigns
+        </p>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <!-- Budget Calculator Form -->
+      <form id="budget-form">
+        <!-- Campaign Goal -->
+        <div class="form-group">
+          <label class="form-label" for="campaign-goal">Campaign Goal *</label>
+          <select id="campaign-goal" class="form-select" required>
+            <option value="">Select your goal...</option>
+            <option value="Brand Awareness">Brand Awareness (Reach more people)</option>
+            <option value="Website Traffic">Website Traffic (Drive visitors to site)</option>
+            <option value="Product Sales">Product Sales (Direct conversions)</option>
+            <option value="Lead Generation">Lead Generation (Collect contacts)</option>
+            <option value="Store Visits">Store Visits (Physical store traffic)</option>
+          </select>
+        </div>
+
+        <!-- Campaign Duration -->
+        <div class="form-group">
+          <label class="form-label" for="duration">Campaign Duration *</label>
+          <select id="duration" class="form-select" required>
+            <option value="">Select duration...</option>
+            <option value="1">1 Day</option>
+            <option value="3">3 Days</option>
+            <option value="7">1 Week</option>
+            <option value="14">2 Weeks</option>
+            <option value="30">1 Month</option>
+            <option value="60">2 Months</option>
+            <option value="90">3 Months</option>
+          </select>
+        </div>
+
+        <!-- Target Audience Size -->
+        <div class="form-group">
+          <label class="form-label" for="audience-size">Expected Audience Size *</label>
+          <select id="audience-size" class="form-select" required>
+            <option value="">Select audience size...</option>
+            <option value="Small">Small (1,000 - 10,000 people)</option>
+            <option value="Medium">Medium (10,000 - 50,000 people)</option>
+            <option value="Large">Large (50,000 - 200,000 people)</option>
+            <option value="Very Large">Very Large (200,000+ people)</option>
+          </select>
+        </div>
+
+        <!-- Platform -->
+        <div class="form-group">
+          <label class="form-label" for="platform">Advertising Platform *</label>
+          <select id="platform" class="form-select" required>
+            <option value="">Select platform...</option>
+            <option value="Facebook">Facebook Ads</option>
+            <option value="Instagram">Instagram Ads</option>
+            <option value="Google">Google Ads</option>
+          </select>
+        </div>
+
+        <!-- Competition Level -->
+        <div class="form-group">
+          <label class="form-label" for="competition">Competition Level *</label>
+          <select id="competition" class="form-select" required>
+            <option value="">Select competition level...</option>
+            <option value="Low">Low (Few competitors in your niche)</option>
+            <option value="Medium">Medium (Moderate competition)</option>
+            <option value="High">High (Many competitors, saturated market)</option>
+          </select>
+        </div>
+
+        <!-- Product Price -->
+        <div class="form-group">
+          <label class="form-label" for="product-price">Average Product Price (৳) *</label>
+          <input 
+            type="number" 
+            id="product-price" 
+            class="form-control" 
+            placeholder="e.g., 1500"
+            min="1"
+            step="1"
+            required
+          >
+          <small style="color: var(--text-muted);">Average price of clothing items you're selling</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          💰 Calculate Optimal Budget
+        </button>
+      </form>
+
+      <!-- Results Section -->
+      <div id="budget-result" style="display: none; margin-top: 2rem;">
+        <!-- Budget Recommendation Cards -->
+        <div class="prediction-grid">
+          <div class="metric-card">
+            <div class="metric-label">Recommended Budget</div>
+            <div class="metric-value">
+              <span id="recommended-budget">0</span><span class="metric-unit">৳</span>
+            </div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Estimated Reach</div>
+            <div class="metric-value" id="estimated-reach">0</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Expected Sales</div>
+            <div class="metric-value" id="expected-sales">0</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Projected ROI</div>
+            <div class="metric-value">
+              <span id="projected-roi">0</span><span class="metric-unit">%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Budget Breakdown -->
+        <div class="card mt-3" style="background: var(--bg-tertiary);">
+          <h4 style="color: var(--primary-light); margin-bottom: 1rem;">📊 Budget Breakdown</h4>
+          <div id="budget-breakdown" style="line-height: 1.8;">
+            <!-- Breakdown will appear here -->
+          </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="card mt-3" style="background: var(--bg-tertiary);">
+          <h4 style="color: var(--primary-light); margin-bottom: 1rem;">💡 Budget Optimization Tips</h4>
+          <div id="budget-tips">
+            <!-- Tips will appear here -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+          <button onclick="resetCalculator()" class="btn btn-secondary">
+            🔄 Calculate Again
+          </button>
+          <a href="create-ad.html" class="btn btn-primary">
+            ✨ Create Ad with This Budget
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/budgetCalculator.js"></script>
+</body>
+</html>

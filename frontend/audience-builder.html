@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Target Audience Builder - AI Ad Predictor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">🤖 AI Ad Predictor</a>
+      <ul class="nav-links">
+        <!-- Will be populated by main.js -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+      <div class="card-header">
+        <h2 class="card-title">🎯 Target Audience Builder for Clothing Ads</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">
+          Build the perfect target audience for your fashion and clothing advertisements
+        </p>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <!-- Audience Builder Form -->
+      <form id="audience-form">
+        <!-- Clothing Type -->
+        <div class="form-group">
+          <label class="form-label" for="clothing-type">Clothing Type *</label>
+          <select id="clothing-type" class="form-select" required>
+            <option value="">Select clothing category...</option>
+            <option value="Men's Casual Wear">Men's Casual Wear</option>
+            <option value="Men's Formal Wear">Men's Formal Wear</option>
+            <option value="Men's Sportswear">Men's Sportswear</option>
+            <option value="Women's Casual Wear">Women's Casual Wear</option>
+            <option value="Women's Formal Wear">Women's Formal Wear</option>
+            <option value="Women's Traditional Wear">Women's Traditional Wear</option>
+            <option value="Women's Sportswear">Women's Sportswear</option>
+            <option value="Kids Clothing">Kids Clothing</option>
+            <option value="Winter Clothing">Winter Clothing</option>
+            <option value="Summer Clothing">Summer Clothing</option>
+            <option value="Accessories">Accessories (Bags, Shoes, Jewelry)</option>
+            <option value="Ethnic Wear">Ethnic Wear (Sarees, Kurtis, Panjabis)</option>
+          </select>
+        </div>
+
+        <!-- Price Range -->
+        <div class="form-group">
+          <label class="form-label" for="price-range">Price Range *</label>
+          <select id="price-range" class="form-select" required>
+            <option value="">Select price range...</option>
+            <option value="Budget">Budget (Under ৳500)</option>
+            <option value="Mid-Range">Mid-Range (৳500 - ৳2000)</option>
+            <option value="Premium">Premium (৳2000 - ৳5000)</option>
+            <option value="Luxury">Luxury (Above ৳5000)</option>
+          </select>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <label class="form-label">Target Gender *</label>
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="gender" value="Women" required>
+              <span>Women</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="gender" value="Men" required>
+              <span>Men</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="gender" value="Unisex">
+              <span>Unisex / All</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Age Group -->
+        <div class="form-group">
+          <label class="form-label" for="age-group">Age Group *</label>
+          <select id="age-group" class="form-select" required>
+            <option value="">Select age group...</option>
+            <option value="13-17">Teenagers (13-17)</option>
+            <option value="18-24">Young Adults (18-24)</option>
+            <option value="25-34">Adults (25-34)</option>
+            <option value="35-44">Middle Age (35-44)</option>
+            <option value="45-54">Mature (45-54)</option>
+            <option value="55+">Senior (55+)</option>
+          </select>
+        </div>
+
+        <!-- Location -->
+        <div class="form-group">
+          <label class="form-label" for="location">Target Location *</label>
+          <select id="location" class="form-select" required>
+            <option value="">Select location...</option>
+            <option value="Dhaka">Dhaka (Capital)</option>
+            <option value="Chittagong">Chittagong</option>
+            <option value="Sylhet">Sylhet</option>
+            <option value="Rajshahi">Rajshahi</option>
+            <option value="Khulna">Khulna</option>
+            <option value="Barisal">Barisal</option>
+            <option value="Rangpur">Rangpur</option>
+            <option value="Mymensingh">Mymensingh</option>
+            <option value="All Bangladesh">All Bangladesh</option>
+          </select>
+        </div>
+
+        <!-- Shopping Behavior -->
+        <div class="form-group">
+          <label class="form-label" for="shopping-behavior">Shopping Behavior *</label>
+          <select id="shopping-behavior" class="form-select" required>
+            <option value="">Select shopping behavior...</option>
+            <option value="Online Shoppers">Online Shoppers (E-commerce users)</option>
+            <option value="Store Visitors">Store Visitors (Physical shop preference)</option>
+            <option value="Both">Both Online and Offline</option>
+            <option value="Impulse Buyers">Impulse Buyers (Quick decisions)</option>
+            <option value="Research Buyers">Research Buyers (Compare before buying)</option>
+          </select>
+        </div>
+
+        <!-- Fashion Interest -->
+        <div class="form-group">
+          <label class="form-label">Fashion Interests (Select multiple)</label>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 0.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Trendy Fashion">
+              <span>Trendy Fashion</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Traditional Clothing">
+              <span>Traditional Clothing</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Designer Brands">
+              <span>Designer Brands</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Sustainable Fashion">
+              <span>Sustainable Fashion</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Streetwear">
+              <span>Streetwear</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" name="interests" value="Luxury Fashion">
+              <span>Luxury Fashion</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          🎯 Generate Target Audience
+        </button>
+      </form>
+
+      <!-- Results Section -->
+      <div id="audience-result" style="display: none; margin-top: 2rem;">
+        <div class="card" style="background: var(--bg-tertiary); border-left: 4px solid var(--primary);">
+          <h3 style="color: var(--primary-light); margin-bottom: 1rem;">📊 Your Optimized Target Audience</h3>
+          <div id="audience-output" style="line-height: 1.8;">
+            <!-- Generated audience will appear here -->
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <button onclick="copyAudience()" class="btn btn-secondary">
+              📋 Copy to Clipboard
+            </button>
+            <button onclick="useInAdPredictor()" class="btn btn-primary">
+              ✨ Use in Ad Predictor
+            </button>
+          </div>
+        </div>
+
+        <!-- Audience Insights -->
+        <div class="card mt-3" style="background: var(--bg-tertiary);">
+          <h4 style="color: var(--primary-light); margin-bottom: 1rem;">💡 Audience Insights</h4>
+          <div id="audience-insights">
+            <!-- Insights will appear here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/audienceBuilder.js"></script>
+</body>
+</html>
